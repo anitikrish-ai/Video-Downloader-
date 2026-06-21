@@ -1,84 +1,139 @@
 # 🎬 MiniTube Downloader
 
-A modern YouTube downloader built with **Flask + yt-dlp + Glassmorphism UI**.  
-Supports downloading videos or extracting audio in high quality with a clean, responsive interface.
+<p align="center">
+  <img src="https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif" width="180">
+</p>
+
+<p align="center">
+  <b>A modern YouTube Video & Audio Downloader built with Flask, yt-dlp, and a futuristic Glassmorphism UI.</b>
+</p>
+
+<p align="center">
+  🎥 Download Videos • 🎵 Extract Audio • 💎 Glass UI • 📱 Responsive Design • ⚡ Fast Downloads
+</p>
 
 ---
 
 ## ✨ Features
 
-- 🎥 Download YouTube videos
-- 🎵 Extract audio (music mode)
-- 🎚 Select quality (Best / 1080p / 720p / 480p)
-- 💎 Modern glassmorphism UI
-- 📱 Fully responsive design (mobile + desktop)
-- ⚡ Fast download using `yt-dlp`
-- 🌙 Dark futuristic UI theme with smooth animations
+* 🎥 Download YouTube videos
+* 🎵 Extract audio (music mode)
+* 🎚️ Multiple quality options
+
+  * ⭐ Best
+  * 📺 1080p
+  * 📺 720p
+  * 📺 480p
+* 💎 Modern Glassmorphism Interface
+* 📱 Fully Responsive (Mobile + Desktop)
+* ⚡ Fast downloads powered by `yt-dlp`
+* 🌙 Dark futuristic UI
+* ✨ Smooth CSS animations
+* 🧩 Lightweight and beginner-friendly project structure
+* ☁️ Deployable on Python hosting platforms
 
 ---
 
-## 🖥️ UI Preview
+## 🖼️ UI Highlights
 
-A sleek glass-style downloader interface with animated background blobs and modern controls.
+MiniTube includes:
+
+✨ Animated glowing blobs
+✨ Glassmorphism cards
+✨ Smooth transitions and hover effects
+✨ Mobile-friendly layout
+✨ Video and Audio mode switch
+✨ Quality selector buttons
+✨ Clean, modern dark theme
 
 ---
 
 ## 🚀 Tech Stack
 
 ### Frontend
-- HTML5
-- CSS3 (Glassmorphism UI)
-- Responsive Design
+
+* HTML5
+* CSS3
+* Glassmorphism Design
+* Responsive Layout
+* CSS Animations
 
 ### Backend
-- Python 3
-- Flask
-- yt-dlp (YouTube downloader engine)
+
+* Python 3
+* Flask
+* yt-dlp
+* Gunicorn
 
 ---
 
 ## 📁 Project Structure
 
-```
-MiniTube/
+```text
+Video-Downloader-/
 │
-├── app.py               # Flask backend
+├── app.py
+├── requirements.txt
+├── README.md
+├── .gitignore
+├── LICENSE
+│
 ├── templates/
-│   └── index.html       # Main UI page
-├── static/
-│   └── styles.css       # Optional external CSS (if separated)
-├── downloads/           # Downloaded files storage
-└── README.md
+│   └── index.html
+│
+└── downloads/
 ```
 
 ---
 
-## ⚙️ Installation & Setup
+## ⚙️ Installation
 
-### 1. Clone the repository
+### 1️⃣ Clone Repository
+
 ```bash
-git clone https://github.com/your-username/minitube-downloader.git
-cd minitube-downloader
+git clone https://github.com/anitikrish-ai/Video-Downloader-.git
+cd Video-Downloader-
 ```
 
 ---
 
-### 2. Install dependencies
+### 2️⃣ Create Virtual Environment (Optional)
+
+Windows
+
 ```bash
-pip install flask yt-dlp
+python -m venv venv
+venv\Scripts\activate
+```
+
+Linux / macOS
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
 ```
 
 ---
 
-### 3. Run the app
+### 3️⃣ Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### 4️⃣ Run Application
+
 ```bash
 python app.py
 ```
 
 ---
 
-### 4. Open in browser
-```
+### 5️⃣ Open Browser
+
+```text
 http://127.0.0.1:5000
 ```
 
@@ -86,76 +141,215 @@ http://127.0.0.1:5000
 
 ## 📌 How It Works
 
-1. User pastes a YouTube URL
-2. Selects:
-   - 🎥 Video OR 🎵 Audio
-   - Quality (Best / 1080p / 720p / 480p)
-3. Flask backend processes request
-4. `yt-dlp` downloads media
-5. File is saved in `/downloads`
+1. Paste a YouTube URL 🔗
+2. Choose:
+
+   * 🎥 Video
+   * 🎵 Audio
+3. Select preferred quality:
+
+   * ⭐ Best
+   * 📺 1080p
+   * 📺 720p
+   * 📺 480p
+4. Click Download ⬇️
+5. Flask processes the request
+6. `yt-dlp` downloads the media
+7. File is saved inside:
+
+```text
+downloads/
+```
 
 ---
 
 ## 🧠 Backend Logic
 
-- Uses `yt-dlp` for extracting video/audio streams
-- Dynamically builds format string based on user input
-- Supports:
-  - Best audio extraction
-  - Merged video + audio download
-  - Quality filtering (height limit)
+### Audio Download
+
+```python
+format = "bestaudio/best"
+```
+
+Downloads the highest quality audio available.
 
 ---
 
-## ⚠️ Important Notes
+### Video Download
 
-- This project is for **educational purposes only**
-- YouTube terms of service may restrict downloading content
-- Some videos may not be downloadable due to restrictions
-- Flask backend must be run locally or on Python-supported hosting
+```python
+bestvideo[height<=QUALITY]+bestaudio/best
+```
 
----
+Downloads:
 
-## 🌐 Deployment Info
-
-### ❌ InfinityFree Hosting Limitation
-- InfinityFree does **NOT support Flask (Python backend)**
-- Only HTML/CSS frontend works there
-
-### ✅ Recommended Hosting Options
-- Render.com
-- Railway.app
-- PythonAnywhere
+✔️ Selected video quality
+✔️ Best available audio
+✔️ Automatically merges streams
 
 ---
 
-## 💡 Suggested Project Improvements
+## 📦 Dependencies
 
-- 📊 Download progress bar (real-time)
-- 🎞 Thumbnail preview before download
-- 📁 Download history panel
-- 🔐 User authentication system
-- ☁ Cloud storage integration
-- 🎨 Dark/Light theme toggle
+```text
+Flask
+yt-dlp
+gunicorn
+```
 
 ---
 
-## 🧑‍💻 Author
+## 📄 requirements.txt
 
-Built with ❤️ using Flask and modern UI design principles.
+```text
+flask
+yt-dlp
+gunicorn
+```
+
+---
+
+## 🌐 Deployment
+
+### Recommended Platforms
+
+* 🚀 Render
+* 🚀 Railway
+* 🚀 PythonAnywhere
+
+---
+
+## 🚀 Deploy on Render
+
+### Build Command
+
+```bash
+pip install -r requirements.txt
+```
+
+### Start Command
+
+```bash
+gunicorn app:app
+```
+
+---
+
+### Render Port Configuration
+
+```python
+import os
+
+port = int(os.environ.get("PORT", 5000))
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=port)
+```
+
+---
+
+## ⚠️ InfinityFree Limitation
+
+InfinityFree does **NOT** support:
+
+❌ Python
+❌ Flask
+❌ Gunicorn
+❌ yt-dlp execution
+
+Only frontend files can run there:
+
+✅ HTML
+✅ CSS
+✅ JavaScript
+
+For the complete application, use:
+
+* Render
+* Railway
+* PythonAnywhere
+
+---
+
+## 🔒 Security Notes
+
+* ✅ URL input validation
+* ✅ Flask POST request handling
+* ✅ Downloads separated from application files
+* ✅ No database required
+* ✅ No user credentials stored
+* ✅ Beginner-friendly and lightweight architecture
+
+---
+
+## 💡 Future Improvements
+
+* 📊 Real-time download progress bar
+* 🎞️ Video thumbnail preview
+* 📁 Download history
+* 🔐 Authentication system
+* ☁️ Cloud storage integration
+* 🌙 Dark / Light mode switch
+* 🌍 Multi-language support
+* 📱 Progressive Web App (PWA)
+* 🔄 Download queue system
+* 🧩 REST API endpoints
+* 📈 Download analytics dashboard
 
 ---
 
 ## ⭐ Project Status
 
-✔ Working backend  
-✔ Responsive UI  
-✔ Video + Audio support  
-✔ Quality selector system  
-🚧 Advanced features can be added next
+```text
+✅ Flask Backend
+✅ yt-dlp Integration
+✅ Video Downloads
+✅ Audio Downloads
+✅ Quality Selection
+✅ Responsive Glass UI
+✅ Mobile Friendly
+✅ Render Deployment Ready
+🚧 More Features Planned
+```
+
+---
+
+## 🧑‍💻 Author
+
+**Krish**
+
+💻 Computer Engineering Student
+🎨 UI Design Enthusiast
+🎌 Anime & Sketch Artist
+🚀 Passionate about Development and Creative Projects
+
+GitHub:
+https://github.com/anitikrish-ai
+
+---
+
+## 🎌 Fun Corner
+
+<p align="center">
+  <img src="https://media.giphy.com/media/GRSnxyhJnPsaQy9YLn/giphy.gif" width="250">
+</p>
+
+> "Keep building. Every project is one step closer to mastery." ⚡
+
+<p align="center">
+  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzVja2N4OW9qN2ttOHQ2dTZ3eTVmbG80dDJtbTNhbTlmZm05bTF6MSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3o7TKsQ8UQ3G7Xk7Pq/giphy.gif" width="220">
+</p>
 
 ---
 
 ## 📜 License
 
-This project is open-source for learning purposes.
+This project is licensed under the MIT License.
+
+Please respect YouTube's Terms of Service and applicable copyright laws when downloading content.
+
+---
+
+<p align="center">
+Made with ❤️, ☕, Python 🐍, Flask ⚗️, yt-dlp 🎬 and lots of anime energy ⚡🎌
+</p>
