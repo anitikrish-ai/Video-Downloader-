@@ -16,25 +16,21 @@ def home():
 @app.route("/download", methods=["POST"])
 def download():
     url = request.form.get("url")
-    download_type = request.form.get(
-        "download_type",
-        "video"
-    )
-    quality = request.form.get(
-        "quality",
-        "best"
-    )
+    download_type = request.form.get("download_type", "video")
+    quality = request.form.get("quality", "best")
 
     try:
-        # MUSIC
+        # AUDIO DOWNLOAD
         if download_type == "audio":
             ydl_opts = {
                 "format": "bestaudio/best",
-                "outtmpl":
-                    f"{DOWNLOAD_FOLDER}/%(title)s.%(ext)s",
+                "outtmpl": f"{DOWNLOAD_FOLDER}/%(title)s.%(ext)s",
+                "cookiefile": "cookies.txt",
+                "noplaylist": True,
+                "quiet": False,
             }
 
-        # VIDEO
+        # VIDEO DOWNLOAD
         else:
             if quality == "best":
                 fmt = "bestvideo+bestaudio/best"
@@ -47,25 +43,25 @@ def download():
             ydl_opts = {
                 "format": fmt,
                 "merge_output_format": "mp4",
-                "outtmpl":
-                    f"{DOWNLOAD_FOLDER}/%(title)s.%(ext)s",
+                "outtmpl": f"{DOWNLOAD_FOLDER}/%(title)s.%(ext)s",
+                "cookiefile": "cookies.txt",
+                "noplaylist": True,
+                "quiet": False,
             }
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download([url])
 
-        return "✅ Download completed!"
+        return "✅ Download completed successfully!"
 
     except Exception as e:
         return f"❌ Error: {e}"
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
-
-import os
-
-port = int(os.environ.get("PORT", 5000))
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=port)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(
+        host="0.0.0.0",
+        port=port,
+        debug=True
+    )
