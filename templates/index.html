@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MiniTube Downloader</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#07080e;
+    overflow:hidden;
+    color:#fff;
+    padding:16px;
+}
+
+/* background blobs (lighter for performance) */
+.blob{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(90px);
+    opacity:.25;
+    animation:float 22s ease-in-out infinite alternate;
+}
+
+.blob-1{
+    width:420px;height:420px;
+    background:#00f2fe;
+    top:-10%;left:-10%;
+}
+
+.blob-2{
+    width:480px;height:480px;
+    background:#ff007f;
+    bottom:-15%;right:-10%;
+}
+
+.blob-3{
+    width:260px;height:260px;
+    background:#8b5cf6;
+    top:40%;left:55%;
+    animation-delay:-6s;
+}
+
+@keyframes float{
+    0%{transform:translate(0,0) scale(1);}
+    100%{transform:translate(40px,-50px) scale(1.1);}
+}
+
+/* main card */
+.card{
+    position:relative;
+    z-index:2;
+    width:100%;
+    max-width:440px;
+    padding:28px 22px;
+    border-radius:22px;
+
+    background:rgba(255,255,255,0.04);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,0.1);
+
+    box-shadow:0 25px 60px rgba(0,0,0,0.6);
+    animation:pop .8s ease;
+}
+
+@keyframes pop{
+    from{opacity:0;transform:translateY(20px);}
+    to{opacity:1;transform:translateY(0);}
+}
+
+h1{
+    text-align:center;
+    font-size:22px;
+    margin-bottom:6px;
+}
+
+.sub{
+    text-align:center;
+    font-size:12px;
+    opacity:.6;
+    margin-bottom:22px;
+}
+
+/* input */
+input[type="url"]{
+    width:100%;
+    padding:14px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,0.08);
+    background:rgba(0,0,0,0.25);
+    color:white;
+    outline:none;
+    margin-bottom:18px;
+}
+
+input::placeholder{
+    color:rgba(255,255,255,0.3);
+}
+
+/* toggle */
+.toggle{
+    display:flex;
+    gap:10px;
+    margin-bottom:18px;
+}
+
+.toggle input{display:none;}
+
+.toggle label{
+    flex:1;
+    padding:12px;
+    text-align:center;
+    border-radius:14px;
+    background:rgba(255,255,255,0.05);
+    cursor:pointer;
+    font-size:14px;
+    transition:.25s;
+}
+
+.toggle input:checked + label{
+    background:rgba(255,255,255,0.15);
+    box-shadow:0 0 18px rgba(255,255,255,0.08);
+}
+
+/* quality */
+.quality{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.quality input{display:none;}
+
+.quality label{
+    padding:12px;
+    text-align:center;
+    border-radius:12px;
+    background:rgba(255,255,255,0.05);
+    font-size:13px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.quality input:checked + label{
+    background:#00f2fe;
+    color:#000;
+    font-weight:600;
+}
+
+/* button */
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(135deg,#00f2fe,#8b5cf6);
+    color:black;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+/* mobile */
+@media(max-width:480px){
+    .card{padding:20px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+
+<div class="card">
+
+    <h1>MiniTube</h1>
+    <div class="sub">Download video or audio easily</div>
+
+    <form action="/download" method="POST">
+
+        <input type="url" name="url" placeholder="Paste YouTube link..." required>
+
+        <!-- TYPE -->
+        <div class="toggle">
+            <input type="radio" id="v" name="download_type" value="video" checked>
+            <label for="v">🎥 Video</label>
+
+            <input type="radio" id="a" name="download_type" value="audio">
+            <label for="a">🎵 Music</label>
+        </div>
+
+        <!-- QUALITY -->
+        <div class="quality">
+
+            <input type="radio" id="best" name="quality" value="best" checked>
+            <label for="best">Best</label>
+
+            <input type="radio" id="1080" name="quality" value="1080">
+            <label for="1080">1080p</label>
+
+            <input type="radio" id="720" name="quality" value="720">
+            <label for="720">720p</label>
+
+            <input type="radio" id="480" name="quality" value="480">
+            <label for="480">480p</label>
+
+        </div>
+
+        <button type="submit">⬇ Download</button>
+
+    </form>
+
+</div>
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}">
+
+</body>
+</html>
