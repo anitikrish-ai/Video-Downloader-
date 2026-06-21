@@ -25,7 +25,6 @@ def download():
             ydl_opts = {
                 "format": "bestaudio/best",
                 "outtmpl": f"{DOWNLOAD_FOLDER}/%(title)s.%(ext)s",
-                "cookiefile": "cookies.txt",
                 "noplaylist": True,
                 "quiet": False,
             }
@@ -35,16 +34,12 @@ def download():
             if quality == "best":
                 fmt = "bestvideo+bestaudio/best"
             else:
-                fmt = (
-                    f"bestvideo[height<={quality}]"
-                    "+bestaudio/best"
-                )
+                fmt = f"bestvideo[height<={quality}]+bestaudio/best"
 
             ydl_opts = {
                 "format": fmt,
                 "merge_output_format": "mp4",
                 "outtmpl": f"{DOWNLOAD_FOLDER}/%(title)s.%(ext)s",
-                "cookiefile": "cookies.txt",
                 "noplaylist": True,
                 "quiet": False,
             }
